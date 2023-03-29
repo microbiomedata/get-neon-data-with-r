@@ -12,3 +12,5 @@ Depends:
     R (>= 3.1)
 Imports:
     stringr
+    feather
+    neonUtilities
