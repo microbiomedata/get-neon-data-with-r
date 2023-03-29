@@ -1,0 +1,14 @@
+Package: get-neon-data-with-r
+Type: Package
+Title: experimental repo for testing R and R package installation in GH actions
+Version: 0.1.0
+Authors@R: person("Mark", "Miller", email = "MAM@lbl.gov",
+            role = c("aut", "cre"),
+            comment = c(ORCID = "0000-0001-9076-6066"))
+Description: experimental repo for testing R and R package installation in GH actions
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    R (>= 3.1)
+Imports:
+    stringr
