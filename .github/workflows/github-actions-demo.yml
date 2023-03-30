@@ -40,8 +40,50 @@ jobs:
       run: |
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add xxx.xxx
-        git commit -m "committing xxx.xxx"
+        git add xname: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push, workflow_dispatch]
+jobs:
+  example-runs-and-setup-r:
+    runs-on: ubuntu-latest
+    steps:
+#    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - uses: r-lib/actions/setup-r@v2
+      with:
+        r-version: '4.2.3' # The R version to download (if necessary) and use.
+    - uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache-version: 2
+        extra-packages: |
+          any::ggplot2
+          any::rcmdcheck
+        needs: |
+          website
+          coverage
+    - run: Rscript -e 'print("hello")'
+    - run: Rscript -e 'library("stringr"); x <- c("why", "video", "cross", "extra", "deal", "authority"); str_replace(x, "[aeiou]", "?")'
+    - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+    - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+    - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+    - name: Check out repository code
+      uses: actions/checkout@v3
+    - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+    - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+    - name: List files in the repository
+      run: |
+        ls ${{ github.workspace }}
+    - run: Rscript stringr-check-file.r
+    - run: Rscript soil_phys_chem_prop_periodic.r
+    - name: Commit files
+      run: |
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add sls_soilpH.feather
+        git commit -m "committing sls_soilpH.feather"
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
